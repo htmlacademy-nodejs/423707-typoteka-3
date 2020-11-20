@@ -12,3 +12,22 @@ module.exports.shuffle = (someArray) => {
 
   return someArray;
 };
+
+module.exports.getDate = () => {
+  const { getRandomInt } = require('./');
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: 'long',
+    timezone: 'UTC',
+    hour: 'numeric',
+    minute: 'numeric'
+  };
+
+  const today = Date.now();
+  const THREE_MONTHS_IN_MILLISECONDS = 3600000 * 24 * 92; // 7948800000
+  const dateLimit = new Date(Date.now() - THREE_MONTHS_IN_MILLISECONDS);
+
+  return new Date(getRandomInt(dateLimit, today)).toLocaleString("ru", options);
+};

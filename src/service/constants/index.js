@@ -1,4 +1,5 @@
 const DEFAULT_COUNT = 1;
+const MAX_PUBLICATION_COUNT = 1000;
 const FILE_NAME = `mocks.json`;
 
 const TITLES = [
@@ -50,9 +51,9 @@ const SENTENCES = [
   'Альбом стал настоящим открытием года. Мощные гитарные рифы и скоростные соло-партии не дадут заскучать.'
 ];
 
-const DEFAULT_COMMAND = '--version'
+const DEFAULT_COMMAND = '--help'
 const USER_ARGV_INDEX = 2
 
 module.exports = {
-  DEFAULT_COUNT, FILE_NAME, TITLES, CATEGORIES, SENTENCES, DEFAULT_COMMAND, USER_ARGV_INDEX
+  DEFAULT_COUNT, MAX_PUBLICATION_COUNT, FILE_NAME, TITLES, CATEGORIES, SENTENCES, DEFAULT_COMMAND, USER_ARGV_INDEX
 }
