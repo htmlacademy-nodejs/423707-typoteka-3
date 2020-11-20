@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const MESSAGE = `
 Программа запускает http-сервер и формирует файл с данными для API.

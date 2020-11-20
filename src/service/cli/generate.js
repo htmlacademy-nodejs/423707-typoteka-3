@@ -1,4 +1,5 @@
 'use strict';
+
 const fs = require(`fs`);
 const {
   getRandomInt,
@@ -6,25 +7,14 @@ const {
   getDate
 } = require(`../utils`);
 
-const {DEFAULT_COUNT, MAX_PUBLICATION_COUNT, FILE_NAME, TITLES, CATEGORIES, SENTENCES} = require('../constants');
-
-// const getDate = () => {
-//   const options = {
-//     year: 'numeric',
-//     month: 'long',
-//     day: 'numeric',
-//     weekday: 'long',
-//     timezone: 'UTC',
-//     hour: 'numeric',
-//     minute: 'numeric'
-//   };
-//
-//   const today = Date.now();
-//   const THREE_MONTHS_IN_MILLISECONDS = 3600000 * 24 * 92; // 7948800000
-//   const dateLimit = new Date(Date.now() - THREE_MONTHS_IN_MILLISECONDS);
-//
-//   return new Date(getRandomInt(dateLimit, today)).toLocaleString("ru", options);
-// };
+const {DEFAULT_COUNT,
+  MAX_PUBLICATION_COUNT,
+  SUCCESS_MESSAGE,
+  LIMIT_EXCEEDED_MESSAGE,
+  FILE_NAME,
+  TITLES,
+  CATEGORIES,
+  SENTENCES} = require(`../constants`);
 
 const generateOffers = (count) => (
   Array(count).fill({}).map(() => ({
@@ -41,14 +31,11 @@ module.exports = {
   run(args) {
     const [count] = args;
 
-    const countPublication = (count) => {
-      return count > MAX_PUBLICATION_COUNT
+    const countPublication = (value) => {
+      return value > MAX_PUBLICATION_COUNT
         ? Number.parseInt(MAX_PUBLICATION_COUNT, 10)
-        : Number.parseInt(count, 10) || DEFAULT_COUNT;
+        : Number.parseInt(value, 10) || DEFAULT_COUNT;
     };
-
-    const SUCCESS_MESSAGE = `Успешно! Файл создан.`;
-    const LIMIT_EXCEEDED = `Не больше 1000 публикаций`;
 
     const content = JSON.stringify(generateOffers(countPublication(count)));
 
@@ -57,7 +44,7 @@ module.exports = {
         return console.error(`Can't write data to file...`);
       }
 
-      return console.info(count > MAX_PUBLICATION_COUNT ? LIMIT_EXCEEDED : SUCCESS_MESSAGE );
+      return console.info(count > MAX_PUBLICATION_COUNT ? LIMIT_EXCEEDED_MESSAGE : SUCCESS_MESSAGE);
     });
   }
-}
+};
